@@ -13,9 +13,12 @@
 <script>
     const app = Vue.createApp({
         data() {
-            message: "hello world"
             return {
+                message: "hello world1"
             }
+        },
+        mounted() {
+            console.log("mounted");
         },
         template: "<div>{{message}}</div>"
     });
