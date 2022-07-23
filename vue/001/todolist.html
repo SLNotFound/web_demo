@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todolist</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                inputValue: "", 
+                nameList: [],
+            }
+        },
+
+        methods: {
+            handleAddItem() {
+                this.nameList.push(this.inputValue);
+                this.inputValue = "";
+            }
+        },
+
+        // v-for 循环读取nameList得到数据
+        // v-model 双向绑定
+        // v-bind 绑定属性
+        template: `
+            <div>
+                <input v-model="inputValue" />
+                <button v-on:click="handleAddItem" v-bind:title="inputValue">增加</button>
+                <ul>
+                   <todo-item 
+                    v-for="(item, index) in nameList"
+                    v-bind:content="item"
+                    v-bind:index="index"
+                   />
+                </ul>
+            </div>
+        `
+    });
+
+    const vm = app.mount("#root");
+    app.component('todo-item', {
+        props: ["content", "index"],
+        template: '<li>{{index}} - {{content}}</li>'
+    });
+
+    // const app = Vue.createApp({
+    //     data() {
+    //         return {
+    //             nameList: ["Alice", "Bob", "Cindy", "Dog"],
+    //         }
+    //     },
+
+    //     // v-for 循环读取nameList得到数据
+    //     template: `
+    //         <ul>
+    //             <li v-for="item in nameList">{{item}}</li>
+    //             <li v-for="(item, index) in nameList">{{item}} + {{index}} </li>
+    //         </ul>
+    //     `
+    // });
+
+    // const vm = app.mount("#root");
+</script>
+</html>
