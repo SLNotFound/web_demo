@@ -14,13 +14,18 @@
     const app = Vue.createApp({
         data() {
             return {
-                message: "hello world1"
+                content: 1
             }
         },
         mounted() {
-            console.log("mounted");
+            // 页面加载完成之后自动执行
+            // console.log("mounted");
+            // 设置一个定时器，让content每隔一秒就加1
+            setInterval(() => {
+                this.content += 1;
+            }, 1000);
         },
-        template: "<div>{{message}}</div>"
+        template: "<div>{{content}}</div>"
     });
 
     const vm = app.mount("#root");
